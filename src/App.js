@@ -5,6 +5,7 @@ import Login from './components/Login'
 import FriendsList from './components/FriendsList'
 import AddFriend from './components/AddFriend'
 import Logout from './components/Logout'
+import PrivateRoute from './components/PrivateRoute'
 
 function App()  {
 
@@ -18,7 +19,7 @@ function App()  {
       <Link className='link' to='friends/add'>Add Friends</Link>
       <Link className='link' to='logout'>Logout</Link>
     </header>
-    
+
       <Route exact path='/'>
         <Login/>
       </Route>
@@ -27,17 +28,11 @@ function App()  {
         <Redirect to='/' />
       </Route>
 
-      <Route exact path='/friends'>
-        <FriendsList/>
-      </Route>
-
-      <Route exact path='/friends/add'>
-        <AddFriend/>
-      </Route>
-
-      <Route exact path='/logout'>
-        <Logout/>
-      </Route>
+      <PrivateRoute exact path='/friends' component={FriendsList}/>
+      
+      <PrivateRoute exact path='/friends/add' component={AddFriend}/>
+        
+      <PrivateRoute exact path='/logout' component={Logout}/>
 
     </div>
     </Router>

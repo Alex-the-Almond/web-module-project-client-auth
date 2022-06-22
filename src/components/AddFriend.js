@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
+import axiosWithAuth from './../utils/axiosWithAuth'
 
 const AddFriend = () => {
     const {push} = useHistory();
@@ -20,11 +21,7 @@ const AddFriend = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const token = localStorage.getItem('token')
-        axios.post('http://localhost:9000/api/friends',form,  {
-            headers: {
-                authorization: token
-            }
-        })
+        axiosWithAuth().post('/friends',form)
             .then(res => {
             push('/friends')
             })
